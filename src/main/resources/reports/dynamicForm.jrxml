@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.10.0.final using JasperReports Library version 6.10.0-unknown  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dynamicForm" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="828bfd0b-0311-417b-83b4-36ac3b6a202e">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<subDataset name="FormListDataset" whenResourceMissingType="Empty" uuid="ee8d9884-91b1-4fab-92fc-33f857593fb7">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="formTitle" class="java.lang.String"/>
+		<field name="questionAnswerList" class="java.util.List"/>
+	</subDataset>
+	<subDataset name="QuestionAnswerDataset" uuid="3b39a489-b748-40eb-bdb4-8a1c5746d519">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="question" class="java.lang.String"/>
+		<field name="answer" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="title" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="incidentType" class="java.lang.String"/>
+	<field name="formList" class="java.util.List"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="40">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="60" backcolor="#006699" uuid="0af72ac3-0eaa-4661-b9d0-8b77b20fe5ac"/>
+				<textField>
+					<reportElement x="20" y="10" width="555" height="40" forecolor="#FFFFFF" uuid="f1660128-4e48-4ed1-a44a-0148f29a8cdf"/>
+					<textElement>
+						<font size="24"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{title}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<detail>
+		<band height="131">
+			<componentElement>
+				<reportElement x="0" y="45" width="555" height="80" uuid="afe4ae94-1c80-48cf-a8e9-5aa441af0043"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="FormListDataset" uuid="58b2d57e-bec5-47fc-8152-5dd484ff5d6a">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{formList})]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="80" width="555">
+						<textField>
+							<reportElement x="0" y="0" width="555" height="20" uuid="229f56e2-bc97-44a3-96c9-037e852d5724"/>
+							<textElement>
+								<font size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{formTitle}]]></textFieldExpression>
+						</textField>
+						<componentElement>
+							<reportElement x="0" y="27" width="555" height="40" uuid="0a7a2949-3f4c-40e5-b5be-ba505e97814c"/>
+							<jr:list>
+								<datasetRun subDataset="QuestionAnswerDataset" uuid="ff5aa367-dce9-454d-a225-5c2b4485d578">
+									<datasetParameter name="REPORT_DATA_SOURCE">
+										<datasetParameterExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{questionAnswerList})]]></datasetParameterExpression>
+									</datasetParameter>
+									<dataSourceExpression><![CDATA[$P{REPORT_CONNECTION}]]></dataSourceExpression>
+								</datasetRun>
+								<jr:listContents height="40" width="555">
+									<textField>
+										<reportElement x="0" y="20" width="555" height="20" uuid="83a58581-61b7-47f9-b590-cf6a63af844e"/>
+										<textElement>
+											<font size="11"/>
+										</textElement>
+										<textFieldExpression><![CDATA["R: "+$F{answer}]]></textFieldExpression>
+									</textField>
+									<textField>
+										<reportElement x="0" y="0" width="555" height="20" uuid="afba0e75-e3be-47d4-b612-9da6eaaed746"/>
+										<textElement>
+											<font size="11"/>
+										</textElement>
+										<textFieldExpression><![CDATA[$F{question}]]></textFieldExpression>
+									</textField>
+								</jr:listContents>
+							</jr:list>
+						</componentElement>
+						<line>
+							<reportElement x="0" y="22" width="551" height="3" forecolor="#000000" uuid="1051d94d-0951-40d7-bd47-ba43d02b3aa3">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</reportElement>
+						</line>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<textField>
+				<reportElement x="0" y="10" width="555" height="26" uuid="09c85c9e-2440-403f-a3fe-2a79b1fa9e84">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="46f9daf0-2ed5-4032-92b8-d00fa756f629"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{incidentType}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-20" y="38" width="595" height="1" forecolor="#666666" uuid="520ccae2-3774-476b-84bf-031ac44494a3"/>
+			</line>
+			<break>
+				<reportElement x="0" y="125" width="554" height="1" uuid="af10e8c9-a0b1-4746-972a-d1a291b50d45"/>
+			</break>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="a71333fa-62cf-40f6-ac49-0891a95e4c87"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="8b94f59f-e7c7-4947-9d51-87141ef2bd87"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="4" y="4" width="100" height="13" uuid="0770a5d0-184d-4494-9817-3ac07873d5b8"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>
